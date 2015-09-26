@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.android.datetimepicker.date.DatePickerDialog;
 import com.android.datetimepicker.time.RadialPickerLayout;
 import com.android.datetimepicker.time.TimePickerDialog;
@@ -18,6 +19,7 @@ import com.brainmurphy.roomhack.R;
 import com.brainmurphy.roomhack.data.RoommateDatasource;
 import com.brainmurphy.roomhack.model.Chore;
 import com.brainmurphy.roomhack.model.Roommate;
+import com.google.android.gms.games.multiplayer.realtime.Room;
 
 import java.text.DateFormat;
 import java.util.ArrayList;
@@ -117,11 +119,15 @@ public class AddChoreFragment extends Fragment implements DatePickerDialog.OnDat
                         roomates.add(roomate);
                     }
                 };
-                datasource.postRoomate(new Roommate("brain", "0", null, null, null));
-                datasource.postRoomate(new Roommate("biff", "1", null, null, null));
-                new MaterialDialog.Builder(this)
-                        .title(R.string.title)
-                        .items(R.array.items)
+                datasource.postRoomate(new Roommate("brain", "0", null, null, null,null,null, 0));
+                datasource.postRoomate(new Roommate("biff", "1", null, null, null, null, null, 0));
+                String[] roomateNames = new String[datasource.getRoomates().size()];
+                for (int i = 0; i < roomateNames.length; i++) {
+                    roomateNames[i] = datasource.getRoomates().get(i).getName();
+                }
+                new MaterialDialog.Builder(getActivity())
+                        .title("Which Roomates?")
+                        .items(roomateNames)
                         .itemsCallbackMultiChoice(null, new MaterialDialog.ListCallbackMultiChoice() {
                             @Override
                             public boolean onSelection(MaterialDialog dialog, Integer[] which, CharSequence[] text) {
@@ -133,7 +139,7 @@ public class AddChoreFragment extends Fragment implements DatePickerDialog.OnDat
                                 return true;
                             }
                         })
-                        .positiveText(R.string.choose)
+                        .positiveText("Done")
                         .show();
             }
         });

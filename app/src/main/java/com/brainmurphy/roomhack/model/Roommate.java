@@ -10,17 +10,41 @@ public class Roommate {
     protected String ID;
     private ArrayList<Chore> chores;
     private ArrayList<Expense> expenses;
-    private ArrayList<Roommate> roomates;
-    ArrayList<Chore> chore = new ArrayList<Chore>();
-    ArrayList<Expense> expense = new ArrayList<Expense>();
-    ArrayList<Roommate> roomate = new ArrayList<Roommate>();
+    private ArrayList<Roommate> roommates;
+    private ArrayList<Request> requestsSent;
+    private ArrayList<Request> requestsReceived;
+    private double balance;
 
-    public Roommate(String name, String ID, ArrayList<Chore> chores, ArrayList<Expense> expenses, ArrayList<Roommate> roomates) {
+
+    public Roommate(String name, String ID, ArrayList<Chore> chores, ArrayList<Expense> expenses, ArrayList<Roommate> roommates, ArrayList<Request> requestsSent, ArrayList<Request> requestsReceived, double balance) {
         this.name = name;
         this.ID = ID;
         this.chores = chores;
         this.expenses = expenses;
-        this.roomates = roomates;
+        this.roommates = roommates;
+        this.requestsSent = requestsSent;
+        this.requestsReceived = requestsReceived;
+        this.balance = balance;
+    }
+
+    public void setBalance(double balance) {
+        this.balance = balance;
+    }
+
+    public ArrayList<Request> getRequestsSent() {
+        return requestsSent;
+    }
+
+    public void setRequestsSent(ArrayList<Request> requestsSent) {
+        this.requestsSent = requestsSent;
+    }
+
+    public ArrayList<Request> getRequestsReceived() {
+        return requestsReceived;
+    }
+
+    public void setRequestsReceived(ArrayList<Request> requestsReceived) {
+        this.requestsReceived = requestsReceived;
     }
 
     public ArrayList<Chore> getChores()
@@ -81,5 +105,8 @@ public class Roommate {
     {
         // fuck.
     }
-    public Roommate user = new Roommate ("", "", chore, expense, roomate);
+    ArrayList<Chore> chore = new ArrayList<Chore>();
+    ArrayList<Expense> expense = new ArrayList<Expense>();
+    ArrayList<Roommate> roommate = new ArrayList<Roommate>();
+    public Roommate user = new Roommate ("", "", chore, expense, roommate, new ArrayList<Request>(), new ArrayList<Request>(), 0);
 }
