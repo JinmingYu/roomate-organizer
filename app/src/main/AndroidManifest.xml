@@ -4,6 +4,7 @@
 
     <!-- To access Google+ APIs: -->
     <uses-permission android:name="android.permission.INTERNET" />
+
     <!--
  To retrieve OAuth 2.0 tokens or invalidate tokens to disconnect a user. This disconnect
      option is required to comply with the Google+ Sign-In developer policies
@@ -41,6 +42,10 @@
         <activity
             android:name=".Calculator"
             android:label="@string/title_activity_calculator" >
+        </activity>
+        <activity
+            android:name=".activity.AddChoreActivity"
+            android:label="@string/title_activity_add_chore" >
         </activity>
     </application>
 

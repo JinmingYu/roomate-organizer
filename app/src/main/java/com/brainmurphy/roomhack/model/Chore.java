@@ -8,6 +8,7 @@ import java.util.Date;
  */
 public class Chore {
     private String name;
+    private String description;
     private Roommate doer;
     private Date deadline;
     private int period;
@@ -23,6 +24,10 @@ public class Chore {
         {
             return period;
         }
+    }
+
+    public Chore() {
+
     }
 
     public Chore(String name, Roommate doer, Date deadline, int period, boolean isPeriodic) {
@@ -67,6 +72,14 @@ public class Chore {
 
     public void setIsPeriodic(boolean isPeriodic) {
         this.isPeriodic = isPeriodic;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }
 

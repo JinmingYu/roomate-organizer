@@ -24,6 +24,7 @@ import android.view.ViewGroup.LayoutParams;
 import android.widget.Toast;
 
 
+import com.brainmurphy.roomhack.Calculator;
 import com.brainmurphy.roomhack.R;
 import com.brainmurphy.roomhack.data.TaskDatasource;
 import com.brainmurphy.roomhack.model.Chore;
