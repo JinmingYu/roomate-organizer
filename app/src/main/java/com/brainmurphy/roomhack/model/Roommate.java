@@ -11,9 +11,9 @@ public class Roommate {
     private ArrayList<Chore> chores;
     private ArrayList<Expense> expenses;
     private ArrayList<Roommate> roomates;
-    ArrayList<Chore> chore = new ArrayList<Chore>;
-    ArrayList<Chore> expense = new ArrayList<Expense>;
-    ArrayList<Chore> roomate = new ArrayList<Roommate>;
+    ArrayList<Chore> chore = new ArrayList<Chore>();
+    ArrayList<Expense> expense = new ArrayList<Expense>();
+    ArrayList<Roommate> roomate = new ArrayList<Roommate>();
 
     public Roommate(String name, String ID, ArrayList<Chore> chores, ArrayList<Expense> expenses, ArrayList<Roommate> roomates) {
         this.name = name;
