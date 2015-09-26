@@ -24,6 +24,7 @@ import retrofit.http.Body;
 public class Calculator extends ActionBarActivity {
     ListView listView;
     ArrayList<Expense> expenses;
+    public static List<Map<String, String>> dataMap;
     // This is the Adapter being used to display the list's data
     public static SimpleAdapter mAdapter;
     @Override
@@ -35,9 +36,9 @@ public class Calculator extends ActionBarActivity {
 
 
         // For the cursor adapter, specify which columns go into which views
-        final String TASK_NAME = "expenseName";
-        final String TASK_DESCRIPTION = "expenseNumber";
-        String[] fromColumns = {TASK_NAME};
+        final String EXPENSE_NAME = "expenseName";
+        final String EXPENSE_DESCRIPTION = "expenseNumber";
+        String[] fromColumns = {EXPENSE_NAME};
         int[] toViews = {android.R.id.text1}; // The TextView in simple_list_item_1
 
         ExpenseDatasource expenseDatasource = new ExpenseDatasource() {
@@ -62,10 +63,10 @@ public class Calculator extends ActionBarActivity {
         expenseDatasource.postExpense(new Expense("internet", 50));
         List<Expense> expenses = expenseDatasource.getExpenses();
 
-        List<Map<String, String>> dataMap = new ArrayList<>();
+        dataMap = new ArrayList<>();
         for (Expense expense : expenses) {
             Map<String, String> map = new HashMap<>();
-            map.put(TASK_NAME, expense.getName());
+            map.put(EXPENSE_NAME, expense.getName());
             dataMap.add(map);
         }
         mAdapter = new SimpleAdapter(this, dataMap,
