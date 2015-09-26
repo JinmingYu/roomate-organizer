@@ -6,13 +6,22 @@ import java.util.ArrayList;
  * General Roommate Class
  */
 public class Roommate {
-//    Roommate (String _name, String _id)
-//    {
-//        chores = new Chore[];
-//        expenses = new Expense[] {};
-//        setName (_name);
-//        setID (_id);
-//    }
+    protected String name;
+    protected String ID;
+    private ArrayList<Chore> chores;
+    private ArrayList<Expense> expenses;
+    private ArrayList<Roommate> roomates;
+    ArrayList<Chore> chore = new ArrayList<Chore>;
+    ArrayList<Chore> expense = new ArrayList<Expense>;
+    ArrayList<Chore> roomate = new ArrayList<Roommate>;
+
+    public Roommate(String name, String ID, ArrayList<Chore> chores, ArrayList<Expense> expenses, ArrayList<Roommate> roomates) {
+        this.name = name;
+        this.ID = ID;
+        this.chores = chores;
+        this.expenses = expenses;
+        this.roomates = roomates;
+    }
 
     public ArrayList<Chore> getChores()
     {
@@ -72,9 +81,5 @@ public class Roommate {
     {
         // fuck.
     }
-
-    protected String name;
-    protected String ID;
-    private ArrayList<Chore> chores;
-    private ArrayList<Expense> expenses;
+    public Roommate user = new Roommate ("", "", chore, expense, roomate);
 }
