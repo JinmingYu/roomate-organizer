@@ -56,13 +56,16 @@ public class Dashboard extends ActionBarActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_dashboard);
+
+        mNotificationList = (ListView) findViewById(R.id.mNotificationList);
 
         // Create a progress bar to display while the list loads
         ProgressBar progressBar = new ProgressBar(this);
         progressBar.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT,
-                LayoutParams.WRAP_CONTENT, Gravity.CENTER));
+                LayoutParams.WRAP_CONTENT));
         progressBar.setIndeterminate(true);
-        getListView().setEmptyView(progressBar);
+        mNotificationList.setEmptyView(progressBar);
 //may be use a fragment here
         // Must add the progress bar to the root of the layout
         ViewGroup root = (ViewGroup) findViewById(android.R.id.content);
@@ -77,7 +80,7 @@ public class Dashboard extends ActionBarActivity
         mAdapter = new SimpleCursorAdapter(this,
                 android.R.layout.simple_list_item_1, null,
                 fromColumns, toViews, 0);
-        setListAdapter(mAdapter);
+        mNotificationList.setAdapter(mAdapter);
 //may be use a fragment here
 
         // Prepare the loader.  Either re-connect with an existing one,
