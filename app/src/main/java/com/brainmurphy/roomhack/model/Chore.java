@@ -7,22 +7,12 @@ import java.util.Date;
  * Created by Matt on 9/26/2015.
  */
 public class Chore {
-    /*Chore (String _name, dateTime _deadline, boolean _isPeriodic, int _period)
-    {
-        setName (_name);
-        setDeadline(_deadline);
-        isPeriodic = _isPeriodic;
-        setPeriod(_period);
-    }*/
+    private String name;
+    private Roommate doer;
+    private Date deadline;
+    private int period;
+    public boolean isPeriodic;
 
-    public String getName ()
-    {
-        return name;
-    }
-    public void setName (String _name)
-    {
-        name = _name;
-    }
     public int getPeriod()
     {
         if (isPeriodic == false)
@@ -34,23 +24,50 @@ public class Chore {
             return period;
         }
     }
-    public void setPeriod (int _period)
-    {
-        period = _period;
-    }
-    public Date getDeadline ()
-    {
-        return deadline;
-    }
-    public void setDeadline (Date _deadline)
-    {
-        deadline = _deadline;
+
+    public Chore(String name, Roommate doer, Date deadline, int period, boolean isPeriodic) {
+        this.name = name;
+        this.doer = doer;
+        this.deadline = deadline;
+        this.period = period;
+        this.isPeriodic = isPeriodic;
     }
 
-    public boolean isPeriodic;
-    private int period;
-    private String name;
-    private Date deadline;
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Roommate getDoer() {
+        return doer;
+    }
+
+    public void setDoer(Roommate doer) {
+        this.doer = doer;
+    }
+
+    public Date getDeadline() {
+        return deadline;
+    }
+
+    public void setDeadline(Date deadline) {
+        this.deadline = deadline;
+    }
+
+    public void setPeriod(int period) {
+        this.period = period;
+    }
+
+    public boolean isPeriodic() {
+        return isPeriodic;
+    }
+
+    public void setIsPeriodic(boolean isPeriodic) {
+        this.isPeriodic = isPeriodic;
+    }
 }
 
 
