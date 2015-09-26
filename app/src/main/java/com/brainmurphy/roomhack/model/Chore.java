@@ -1,6 +1,7 @@
 package com.brainmurphy.roomhack.model;
 
 
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -8,10 +9,13 @@ import java.util.Date;
  */
 public class Chore {
     private String name;
-    private Roommate doer;
     private Date deadline;
     private int period;
     public boolean isPeriodic;
+    private ArrayList<Roommate> assignees;
+
+    // either "incomplete,"
+    private String status;
 
     public int getPeriod()
     {
@@ -25,12 +29,13 @@ public class Chore {
         }
     }
 
-    public Chore(String name, Roommate doer, Date deadline, int period, boolean isPeriodic) {
+    public Chore(String name, Date deadline, int period, boolean isPeriodic, ArrayList<Roommate> assignees) {
         this.name = name;
-        this.doer = doer;
         this.deadline = deadline;
         this.period = period;
         this.isPeriodic = isPeriodic;
+        this.assignees = assignees;
+        status = "incomplete";
     }
 
     public String getName() {
@@ -39,14 +44,6 @@ public class Chore {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public Roommate getDoer() {
-        return doer;
-    }
-
-    public void setDoer(Roommate doer) {
-        this.doer = doer;
     }
 
     public Date getDeadline() {
@@ -67,6 +64,43 @@ public class Chore {
 
     public void setIsPeriodic(boolean isPeriodic) {
         this.isPeriodic = isPeriodic;
+    }
+
+    public void addAssignee (Roommate assignee)
+    {
+        assignees.add (assignee);
+    }
+
+    public ArrayList<Roommate> getAssignees ()
+    {
+        return assignees;
+    }
+
+    public void setStatus (String status)
+    {
+        if ((status!="incomplete") || (status != "complete") || (status != "overdue"))
+        {
+            // do nothing, or return an error
+        }
+        else
+        {
+            this.status = status;
+        }
+    }
+
+    public String getStatus()
+    {
+        return status;
+    }
+
+    public void complete()
+    {
+        if (isPeriodic)
+        {
+            deadline.setTime (deadline.getTime() +(period*(24*60*60*1000)));
+            status = "incomplete";
+        }
+        else status = "complete";
     }
 }
 
