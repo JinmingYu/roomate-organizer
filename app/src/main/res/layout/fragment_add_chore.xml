@@ -1,0 +1,92 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.brainmurphy.roomhack.fragment.AddChoreFragment"
+    android:padding="20dp">
+
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/titleEditText"
+        android:hint="Title"
+        android:textSize="40dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textMultiLine"
+        android:ems="10"
+        android:id="@+id/descriptionEditText"
+        android:layout_marginTop="20dp"
+        android:hint="description"
+        android:textSize="25dp"
+        android:layout_below="@+id/titleEditText"
+        android:layout_alignLeft="@+id/titleEditText"
+        android:layout_alignStart="@+id/titleEditText" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textMultiLine"
+        android:ems="10"
+        android:id="@+id/dueEditText"
+        android:layout_marginTop="20dp"
+        android:hint="due"
+        android:textSize="25dp"
+        android:layout_below="@+id/descriptionEditText"
+        android:layout_alignLeft="@+id/descriptionEditText"
+        android:layout_alignStart="@+id/descriptionEditText" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textMultiLine"
+        android:ems="10"
+        android:id="@+id/assigneesEditText"
+        android:layout_marginTop="20dp"
+        android:hint="assignees"
+        android:textSize="25dp"
+        android:layout_below="@+id/dueEditText"
+        android:layout_alignLeft="@+id/dueEditText"
+        android:layout_alignStart="@+id/dueEditText"
+        android:elegantTextHeight="false" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Done"
+        android:id="@+id/doneTextView"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        style="@style/Base.V12.Widget.AppCompat.EditText"
+        android:background="@drawable/button_background"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:textSize="25dp" />
+
+    <TextView
+        style="@style/Base.V12.Widget.AppCompat.EditText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Delete"
+        android:id="@+id/deleteTextView"
+        android:background="@drawable/button_background"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:textSize="25dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+</RelativeLayout>

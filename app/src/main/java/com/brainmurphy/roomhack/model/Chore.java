@@ -9,6 +9,11 @@ import java.util.Date;
  */
 public class Chore {
     private String name;
+<<<<<<< HEAD
+=======
+    private String description;
+    private Roommate doer;
+>>>>>>> 855668b214b87b5f59ac2f717406505fcab4c853
     private Date deadline;
     private int period;
     public boolean isPeriodic;
@@ -29,7 +34,15 @@ public class Chore {
         }
     }
 
+<<<<<<< HEAD
     public Chore(String name, Date deadline, int period, boolean isPeriodic, ArrayList<Roommate> assignees) {
+=======
+    public Chore() {
+
+    }
+
+    public Chore(String name, Roommate doer, Date deadline, int period, boolean isPeriodic) {
+>>>>>>> 855668b214b87b5f59ac2f717406505fcab4c853
         this.name = name;
         this.deadline = deadline;
         this.period = period;
@@ -66,6 +79,7 @@ public class Chore {
         this.isPeriodic = isPeriodic;
     }
 
+<<<<<<< HEAD
     public void addAssignee (Roommate assignee)
     {
         assignees.add (assignee);
@@ -101,6 +115,14 @@ public class Chore {
             status = "incomplete";
         }
         else status = "complete";
+=======
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+>>>>>>> 855668b214b87b5f59ac2f717406505fcab4c853
     }
 }
 

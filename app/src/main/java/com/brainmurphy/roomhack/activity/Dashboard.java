@@ -1,7 +1,5 @@
-package com.brainmurphy.roomhack;
+package com.brainmurphy.roomhack.activity;
 
-import android.app.Activity;
-import android.app.ListActivity;
 import android.app.LoaderManager;
 import android.content.CursorLoader;
 import android.content.Intent;
@@ -12,7 +10,6 @@ import android.provider.ContactsContract;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,23 +24,36 @@ import android.view.ViewGroup.LayoutParams;
 import android.widget.Toast;
 
 
+import com.brainmurphy.roomhack.Calculator;
+import com.brainmurphy.roomhack.R;
+import com.brainmurphy.roomhack.data.TaskDatasource;
+import com.brainmurphy.roomhack.model.Chore;
+import com.google.android.gms.gcm.Task;
+
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-public class Dashboard extends ActionBarActivity
-        implements LoaderManager.LoaderCallbacks<Cursor>  {
+import retrofit.Retrofit;
+import retrofit.http.Body;
+
+public class Dashboard extends ActionBarActivity {
     private ListView mDrawerList;
     private DrawerLayout mDrawerLayout;
     private ArrayAdapter ArrayAdapter;
     private ActionBarDrawerToggle mDrawerToggle;
     private String mActivityTitle;
     ListView mNotificationList;
+    Retrofit retrofit = new Retrofit.Builder()
+            .baseUrl("http://localhost:3000")
+            .build();
 
 
 
     // This is the Adapter being used to display the list's data
-    SimpleCursorAdapter mAdapter;
+    SimpleAdapter mAdapter;
 
     // These are the Contacts rows that we will retrieve
     static final String[] PROJECTION = new String[] {ContactsContract.Data._ID,
@@ -73,30 +83,45 @@ public class Dashboard extends ActionBarActivity
         root.addView(progressBar);
 
         // For the cursor adapter, specify which columns go into which views
-        String[] fromColumns = {ContactsContract.Data.DISPLAY_NAME};
+        final String TASK_NAME = "taskname";
+        final String TASK_DESCRIPTION = "description";
+        String[] fromColumns = {TASK_NAME};
         int[] toViews = {android.R.id.text1}; // The TextView in simple_list_item_1
 
-        // Create an empty adapter we will use to display the loaded data.
-        // We pass null for the cursor, then update it in onLoadFinished()
-        mAdapter = new SimpleCursorAdapter(this,
-                android.R.layout.simple_list_item_1, null,
-                fromColumns, toViews, 0);
-        mNotificationList.setAdapter(mAdapter);
-//may be use a fragment here
+        TaskDatasource taskDatasource = new TaskDatasource() {
 
-        // Prepare the loader.  Either re-connect with an existing one,
-        // or start a new one.
-        getLoaderManager().initLoader(0, null, this);
+            private ArrayList<Chore> list = new ArrayList<>();
+            @Override
+            public List<Chore> getChores() {
+                return list;
+            }
+
+            @Override
+            public List<Chore> getChores(int roommateId) {
+                return list;
+            }
+
+            @Override
+            public void postChore(@Body Chore chore) {
+                list.add(chore);
+            }
+        };
+        taskDatasource.postChore(new Chore("Trash", null, new Date(), 0, false));
+        taskDatasource.postChore(new Chore("Dishes", null, new Date(), 0, false));
+        List<Chore> chores = taskDatasource.getChores();
+
+        List<Map<String, String>> dataMap = new ArrayList<>();
+        for (Chore chore : chores) {
+            Map<String, String> map = new HashMap<>();
+            map.put(TASK_NAME, chore.getName());
+            dataMap.add(map);
+        }
+        mAdapter = new SimpleAdapter(this, dataMap,
+                android.R.layout.simple_list_item_1,
+                fromColumns, toViews);
+        mNotificationList.setAdapter(mAdapter);
 
         mDrawerList = (ListView)findViewById(R.id.navList);mDrawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout);
-        mNotificationList = (ListView) findViewById(R.id.mNotificationList);
-        String[] from = new String[] {"title", "warning"};
-        int[] to = new int[] { R.id.title, R.id.warning};
-        // prepare the list of all records
-        List<HashMap<String, String>> fillMaps = new ArrayList<HashMap<String, String>>();
-        // fill in the grid_item layout
-        SimpleAdapter adapter = new SimpleAdapter(this, fillMaps, R.layout.notification_list_item, from, to);
-        mNotificationList.setAdapter(adapter);
         mActivityTitle = getTitle().toString();
 
         addDrawerItems();
@@ -107,35 +132,10 @@ public class Dashboard extends ActionBarActivity
 
     }
 
-    // Called when a new Loader needs to be created
-    public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-        // Now create and return a CursorLoader that will take care of
-        // creating a Cursor for the data being displayed.
-        return new CursorLoader(this, ContactsContract.Data.CONTENT_URI,
-                PROJECTION, SELECTION, null, null);
-    }
-
-    // Called when a previously created loader has finished loading
-    public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
-        // Swap the new cursor in.  (The framework will take care of closing the
-        // old cursor once we return.)
-        mAdapter.swapCursor(data);
-    }
-
-    // Called when a previously created loader is reset, making the data unavailable
-    public void onLoaderReset(Loader<Cursor> loader) {
-        // This is called when the last Cursor provided to onLoadFinished()
-        // above is about to be closed.  We need to make sure we are no
-        // longer using it.
-        mAdapter.swapCursor(null);
-    }
-
 
     public void onListItemClick(ListView l, View v, int position, long id) {
         // Do something when a list item is clicked
     }
-
-
 
 
 

@@ -10,6 +10,7 @@ public class Expense {
     private double cost;
     private String name;
     private ArrayList<Roommate> payees;
+<<<<<<< HEAD
     private String status;
     private Date deadline;
     public boolean isPeriodic;
@@ -21,6 +22,18 @@ public class Expense {
         this.payees = payees;
         status = "incomplete";
         this.deadline = deadline;
+=======
+
+    public Expense(double cost, String name) {
+        this.cost = cost;
+        this.name = name;
+    }
+
+    public Expense(double cost, String name, ArrayList<Roommate> payees) {
+        this.cost = cost;
+        this.name = name;
+        this.payees = payees;
+>>>>>>> 855668b214b87b5f59ac2f717406505fcab4c853
     }
 
     public double getCost() {
@@ -46,6 +59,7 @@ public class Expense {
 
     public ArrayList<Roommate> getPayees() {
         return payees;
+<<<<<<< HEAD
     }
 
     public void setPayee(ArrayList<Roommate> payees) {
@@ -88,5 +102,11 @@ public class Expense {
     public void setDeadline (Date deadline)
     {
         this.deadline = deadline;
+=======
+    }
+
+    public void setPayee(ArrayList<Roommate> payees) {
+        this.payees = payees;
+>>>>>>> 855668b214b87b5f59ac2f717406505fcab4c853
     }
 }
