@@ -1,9 +1,11 @@
-package com.brainmurphy.roomhack;
+package com.brainmurphy.roomhack.activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import com.brainmurphy.roomhack.R;
 
 public class RegisterActivity extends AppCompatActivity {
 
