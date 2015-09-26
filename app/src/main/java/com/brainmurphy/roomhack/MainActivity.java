@@ -18,6 +18,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        if (!getSharedPreferences(CONST.PREFS, MODE_PRIVATE).getBoolean(CONST.IS_LOGGED_IN, false)) {
+            startActivity(new Intent(this, Dashboard.class));
+        }
 
         bLogin = (Button) findViewById(R.id.bLogIn);
         bLogin.setOnClickListener(this);
@@ -29,16 +32,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.bLogIn:
-                Intent logInIntent = new Intent(MainActivity.this, Dashboard.class);
-                startActivity(logInIntent);
-                break;
-            case R.id.bRegister:
-                Intent registerIntent = new Intent(MainActivity.this, RegisterActivity.class);
-                startActivity(registerIntent);
-                break;
-        }
-
+        startActivity(new Intent(this, LoginActivity.class));
     }
 }
