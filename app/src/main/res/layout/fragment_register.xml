@@ -33,6 +33,14 @@
         android:layout_centerVertical="true"
         android:layout_alignLeft="@+id/userNameTextBox"
         android:layout_alignStart="@+id/userNameTextBox" />
+    <EditText
+        android:hint="repeat pass..."
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/passwordRepeatTextBox"
+        android:layout_below="@+id/passwordTextBox"
+        android:layout_alignLeft="@+id/passwordTextBox"
+        android:layout_alignStart="@+id/passwordTextBox" />
 
     <Button
         style="?android:attr/buttonStyleSmall"
@@ -40,6 +48,6 @@
         android:layout_height="wrap_content"
         android:text="Go"
         android:id="@+id/goButton"
-        android:layout_below="@+id/passwordTextBox"
+        android:layout_below="@+id/passwordRepeatTextBox"
         android:layout_centerHorizontal="true" />
 </RelativeLayout>
