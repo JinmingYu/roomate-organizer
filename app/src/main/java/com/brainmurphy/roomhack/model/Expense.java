@@ -10,7 +10,7 @@ public class Expense {
     private String name;
     private ArrayList<Roommate> payees;
 
-    public Expense(double cost, String name) {
+    public Expense(String name, double cost) {
         this.cost = cost;
         this.name = name;
     }

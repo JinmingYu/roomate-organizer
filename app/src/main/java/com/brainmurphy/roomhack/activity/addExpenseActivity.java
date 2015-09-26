@@ -37,8 +37,8 @@ public class addExpenseActivity extends ActionBarActivity {
                         String expenseTitle = expenseName.getText().toString();
                         String expenseCost = expenseNumber.getText().toString();
                         double expenseNumber = Double.parseDouble(expenseCost);
-                        Expense newExpense = new Expense(expenseNumber, expenseTitle);
-                        Calculator.adapter.notifyDataSetChanged();
+                        Expense newExpense = new Expense(expenseTitle,expenseNumber);
+                        Calculator.mAdapter.notifyDataSetChanged();
 
 
                         //post now has id set.
@@ -73,8 +73,8 @@ public class addExpenseActivity extends ActionBarActivity {
             String expenseTitle = expenseName.getText().toString();
             String expenseCost = expenseNumber.getText().toString();
             double expenseNumber = Double.parseDouble(expenseCost);
-            Expense newExpense = new Expense(expenseNumber, expenseTitle);
-            Calculator.adapter.notifyDataSetChanged();
+            Expense newExpense = new Expense(expenseTitle, expenseNumber);
+            Calculator.mAdapter.notifyDataSetChanged();
 
 
             //post now has id set.
