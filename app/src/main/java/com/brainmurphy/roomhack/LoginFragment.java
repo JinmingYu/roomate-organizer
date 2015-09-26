@@ -20,7 +20,6 @@ import javax.xml.datatype.Duration;
  */
 public class LoginFragment extends Fragment {
 
-    private LoginOrRegisterListener listener;
     private boolean isRegistering;
 
     public LoginFragment() {
@@ -44,7 +43,7 @@ public class LoginFragment extends Fragment {
             public void onClick(View v) {
                 String username = ((EditText) finalRoot.findViewById(R.id.userNameTextBox)).getText().toString();
                 String pass = ((EditText) finalRoot.findViewById(R.id.passwordTextBox)).getText().toString();
-                SharedPreferences prefs = getActivity().getSharedPreferences("prefs", Context.MODE_PRIVATE);
+                SharedPreferences prefs = getActivity().getSharedPreferences(CONST.PREFS, Context.MODE_PRIVATE);
 
                 if (isRegistering) {
                     String passConfirm = ((EditText) finalRoot.findViewById(R.id.passwordRepeatTextBox)).getText().toString();
@@ -53,15 +52,15 @@ public class LoginFragment extends Fragment {
                         return;
                     } else {
                         SharedPreferences.Editor editor = prefs.edit();
-                        editor.putString("username", username);
-                        editor.putString("password", pass);
-                        editor.putBoolean("loggedIn", true);
+                        editor.putString(CONST.USERNAME, username);
+                        editor.putString(CONST.PASS, pass);
+                        editor.putBoolean(CONST.IS_LOGGED_IN, true);
                         editor.apply();
                         startActivity(new Intent(getActivity(), Dashboard.class));
                     }
                 } else {
-                    if (prefs.getString("username", "asdfasdf").equals(username) && prefs.getString("password", "asdfasdf").equals(pass)) {
-                        prefs.edit().putBoolean("loggedIn", true).apply();
+                    if (prefs.getString(CONST.USERNAME, "asdfasdf").equals(username) && prefs.getString(CONST.PASS, "asdfasdf").equals(pass)) {
+                        prefs.edit().putBoolean(CONST.IS_LOGGED_IN, true).apply();
                         startActivity(new Intent(getActivity(), Dashboard.class));
                     }
                 }
@@ -69,19 +68,6 @@ public class LoginFragment extends Fragment {
         });
         return root;
     }
-
-
-    @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        if (activity instanceof LoginOrRegisterListener) {
-            listener= (LoginOrRegisterListener)activity;
-        } else {
-            throw new ClassCastException("Activity must implement LoginOrRegisterListener");
-        }
-
-    }
-
 
     public interface LoginOrRegisterListener {
         public void OnLoginOrRegister();
