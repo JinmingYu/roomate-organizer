@@ -25,4 +25,18 @@
         android:paddingBottom="1dp"
         android:layout_marginLeft="5dp"
         android:textColor="@android:color/white"/>
+
+    <TextView
+        android:id="@+id/settings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@id/title"
+        android:paddingLeft="2dp"
+        android:paddingRight="2dp"
+        android:paddingTop="1dp"
+        android:paddingBottom="1dp"
+        android:layout_marginLeft="5dp"
+        android:textColor="@android:color/white"/>
+
 </RelativeLayout>
