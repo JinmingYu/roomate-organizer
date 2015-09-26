@@ -1,21 +1,19 @@
-package com.brainmurphy.roomhack;
+package com.brainmurphy.roomhack.activity;
 
-import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.brainmurphy.roomhack.Calculator;
+import com.brainmurphy.roomhack.R;
 import com.brainmurphy.roomhack.model.Expense;
 
-public class addExpense extends ActionBarActivity {
+public class addExpenseActivity extends ActionBarActivity {
     private EditText expenseName;
     private EditText expenseNumber;
     Button btnAdd;
@@ -44,7 +42,7 @@ public class addExpense extends ActionBarActivity {
 
 
                         //post now has id set.
-                        Toast.makeText(addExpense.this, "Add Clicked!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(addExpenseActivity.this, "Add Clicked!", Toast.LENGTH_SHORT).show();
                         break;
                 }
 
@@ -80,7 +78,7 @@ public class addExpense extends ActionBarActivity {
 
 
             //post now has id set.
-            Toast.makeText(addExpense.this, "Add Clicked!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(addExpenseActivity.this, "Add Clicked!", Toast.LENGTH_SHORT).show();
             //then close the app
             finish();
 

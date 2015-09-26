@@ -7,14 +7,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.Toast;
 
+import com.brainmurphy.roomhack.activity.addExpenseActivity;
 import com.brainmurphy.roomhack.model.Expense;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -22,7 +21,7 @@ import java.util.List;
 public class Calculator extends AppCompatActivity {
     ListView listView;
     ArrayList<Expense> expenses;
-    static SimpleAdapter adapter;
+    public static SimpleAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,8 +46,13 @@ public class Calculator extends AppCompatActivity {
         // Third parameter - ID of the TextView to which the data is written
         // Forth - the Array of data
 
+        HashMap<String, Double> hashMapRent = new HashMap<String, Double>();
+        hashMapRent.put("rent", 1400d);
+
         // prepare the list of all records
-        List<HashMap<String, String>> fillMaps = new ArrayList<HashMap<String, String>>();
+        List<HashMap<String, Double>> fillMaps = new ArrayList<>();
+        fillMaps.add(hashMapRent);
+
         // fill in the grid_item layout
         adapter = new SimpleAdapter(this, fillMaps, R.layout.calculator_expense_item, from, to);
 
@@ -122,7 +126,7 @@ public class Calculator extends AppCompatActivity {
         }
         if(id == R.id.add){
             //Start the add group activity
-            Intent myintent = new Intent(this,addExpense.class);
+            Intent myintent = new Intent(this,addExpenseActivity.class);
             startActivity(myintent);
         }
 
