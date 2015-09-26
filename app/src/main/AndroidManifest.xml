@@ -47,6 +47,10 @@
             android:name=".Calculator"
             android:label="@string/title_activity_calculator" >
         </activity>
+        <activity
+            android:name=".addExpense"
+            android:label="@string/title_activity_add_expense" >
+        </activity>
     </application>
 
 </manifest>

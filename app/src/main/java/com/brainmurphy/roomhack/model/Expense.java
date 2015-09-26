@@ -8,12 +8,17 @@ import java.util.ArrayList;
 public class Expense {
     private double cost;
     private String name;
-    private ArrayList<Roommate> payee;
+    private ArrayList<Roommate> payees;
 
-    public Expense(double cost, String name, ArrayList<Roommate> payee) {
+    public Expense(double cost, String name) {
         this.cost = cost;
         this.name = name;
-        this.payee = payee;
+    }
+
+    public Expense(double cost, String name, ArrayList<Roommate> payees) {
+        this.cost = cost;
+        this.name = name;
+        this.payees = payees;
     }
 
     public double getCost() {
@@ -32,11 +37,11 @@ public class Expense {
         this.name = name;
     }
 
-    public ArrayList<Roommate> getPayee() {
-        return payee;
+    public ArrayList<Roommate> getPayees() {
+        return payees;
     }
 
-    public void setPayee(ArrayList<Roommate> payee) {
-        this.payee = payee;
+    public void setPayee(ArrayList<Roommate> payees) {
+        this.payees = payees;
     }
 }
