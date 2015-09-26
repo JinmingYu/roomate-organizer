@@ -36,6 +36,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (v.getId() == R.id.bRegister) {
             intent.putExtra(CONST.SHOULD_SHOW_REGISTRATION, true);
         }
-        startActivity(new Intent(this, LoginActivity.class));
+        startActivity(intent);
     }
 }

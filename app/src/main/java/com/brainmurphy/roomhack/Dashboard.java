@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.ListActivity;
 import android.app.LoaderManager;
 import android.content.CursorLoader;
+import android.content.Intent;
 import android.content.Loader;
 import android.content.res.Configuration;
 import android.database.Cursor;
@@ -139,14 +140,41 @@ public class Dashboard extends ActionBarActivity
 
 
     private void addDrawerItems() {
-        String[] osArray = { "Expense Calculator", "Chores", "Settings", "xxx", "xxx" };
-        ArrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, osArray);
+        String[] osArray = { "Expense Calculator", "Chores", "My Room", "Settings", "Requests" };
+        ArrayAdapter = new ArrayAdapter<String>(this, R.layout.side_bar_item, osArray);
         mDrawerList.setAdapter(ArrayAdapter);
 
         mDrawerList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(Dashboard.this, "Click", Toast.LENGTH_SHORT).show();
+                long myid = id;
+                //calculator
+                if (id == 0) {
+                    Intent intent = new Intent(Dashboard.this, Calculator.class);
+                    startActivity(intent);
+                    Toast.makeText(getApplicationContext(), "another activity", Toast.LENGTH_SHORT).show();
+
+                }
+                //chores
+                if (id == 1) {
+                    Intent intent = new Intent(Dashboard.this, Calculator.class);
+                    startActivity(intent);
+                }
+                //my room
+                if (id == 2) {
+                    Intent intent = new Intent(Dashboard.this, Calculator.class);
+                    startActivity(intent);
+                }
+                //settings
+                if (id == 3) {
+                    Intent intent = new Intent(Dashboard.this, Calculator.class);
+                    startActivity(intent);
+                }
+                //requests
+                if (id == 4) {
+                    Intent intent = new Intent(Dashboard.this, Calculator.class);
+                    startActivity(intent);
+                }
             }
         });
     }
