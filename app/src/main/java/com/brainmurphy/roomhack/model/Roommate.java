@@ -107,6 +107,6 @@ public class Roommate {
     }
     ArrayList<Chore> chore = new ArrayList<Chore>();
     ArrayList<Expense> expense = new ArrayList<Expense>();
-    ArrayList<Roommate> myRoommates = new ArrayList<Roommate>();
-    public Roommate user = new Roommate ("", "", chore, expense, myRoommates, new ArrayList<Request>(), new ArrayList<Request>(), 0);
+    ArrayList<Roommate> roommate = new ArrayList<Roommate>();
+    public Roommate user = new Roommate ("", "", chore, expense, roommate, new ArrayList<Request>(), new ArrayList<Request>(), 0);
 }

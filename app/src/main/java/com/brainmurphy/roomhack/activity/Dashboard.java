@@ -105,8 +105,8 @@ public class Dashboard extends ActionBarActivity {
                 list.add(chore);
             }
         };
-        taskDatasource.postChore(new Chore("Trash", null, new Date(), 0, false));
-        taskDatasource.postChore(new Chore("Dishes", null, new Date(), 0, false));
+        taskDatasource.postChore(new Chore("Trash", new Date(), 0, false));
+        taskDatasource.postChore(new Chore("Dishes", new Date(), 0, false));
         List<Chore> chores = taskDatasource.getChores();
 
         List<Map<String, String>> dataMap = new ArrayList<>();

@@ -1,11 +1,13 @@
 package com.brainmurphy.roomhack.fragment;
 
 import android.app.Activity;
+import android.app.DialogFragment;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,6 +27,7 @@ import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 import retrofit.http.Body;
@@ -34,7 +37,7 @@ import retrofit.http.Body;
  * Activities that contain this fragment must implement the
  * {@link AddChoreFragment.ChoreAddListener} interface
  */
-public class AddChoreFragment extends Fragment implements DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener {
+public class AddChoreFragment extends DialogFragment implements DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener {
 
     private ChoreAddListener mListener;
 
@@ -68,7 +71,9 @@ public class AddChoreFragment extends Fragment implements DatePickerDialog.OnDat
         timePicker = TimePickerDialog.newInstance(this, calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE), true);
 
         View root = inflater.inflate(R.layout.fragment_add_chore, container, false);
-        ((EditText) root.findViewById(R.id.titleEditText)).addTextChangedListener(new TextWatcher() {
+        EditText titleEditText = ((EditText) root.findViewById(R.id.titleEditText));
+        titleEditText.setText(chore.getName());
+        titleEditText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
             }
@@ -82,7 +87,8 @@ public class AddChoreFragment extends Fragment implements DatePickerDialog.OnDat
                 chore.setName(s.toString());
             }
         });
-        ((EditText) root.findViewById(R.id.descriptionEditText)).addTextChangedListener(new TextWatcher() {
+        EditText descriptionEditText = ((EditText) root.findViewById(R.id.descriptionEditText));
+        descriptionEditText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
             }
@@ -104,11 +110,19 @@ public class AddChoreFragment extends Fragment implements DatePickerDialog.OnDat
             }
         });
 
-        root.findViewById(R.id.assigneesEditText).setOnClickListener(new View.OnClickListener() {
+        final EditText assigneesEditText = (EditText) root.findViewById(R.id.assigneesEditText);
+        StringBuilder builder = new StringBuilder();
+        for (Roommate roomate : chore.getAssignees()) {
+            builder.append(roomate.getName());
+            builder.append(", ");
+        }
+        assigneesEditText.setText(chore.getAssignees().size() > 0 ? builder.substring(0, builder.length() - 2) : builder.toString());
+        assigneesEditText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 RoommateDatasource datasource = new RoommateDatasource() {
                     private ArrayList<Roommate> roomates = new ArrayList<>();
+
                     @Override
                     public List<Roommate> getRoomates() {
                         return roomates;
@@ -119,11 +133,14 @@ public class AddChoreFragment extends Fragment implements DatePickerDialog.OnDat
                         roomates.add(roomate);
                     }
                 };
-                datasource.postRoomate(new Roommate("brain", "0", null, null, null,null,null, 0));
+                datasource.postRoomate(new Roommate("brain", "0", null, null, null, null, null, 0));
                 datasource.postRoomate(new Roommate("biff", "1", null, null, null, null, null, 0));
-                String[] roomateNames = new String[datasource.getRoomates().size()];
+                Roommate[] roomates = new Roommate[chore.getAssignees().size()];
+                roomates = chore.getAssignees().toArray(roomates);
+                final Roommate[] finalRoommates = roomates;
+                final String[] roomateNames = new String[finalRoommates.length];
                 for (int i = 0; i < roomateNames.length; i++) {
-                    roomateNames[i] = datasource.getRoomates().get(i).getName();
+                    roomateNames[i] = finalRoommates[i].getName();
                 }
                 new MaterialDialog.Builder(getActivity())
                         .title("Which Roomates?")
@@ -131,11 +148,15 @@ public class AddChoreFragment extends Fragment implements DatePickerDialog.OnDat
                         .itemsCallbackMultiChoice(null, new MaterialDialog.ListCallbackMultiChoice() {
                             @Override
                             public boolean onSelection(MaterialDialog dialog, Integer[] which, CharSequence[] text) {
-                                /**
-                                 * If you use alwaysCallMultiChoiceCallback(), which is discussed below,
-                                 * returning false here won't allow the newly selected check box to actually be selected.
-                                 * See the limited multi choice dialog example in the sample project for details.
-                                 **/
+                                ArrayList<Roommate> assignees = new ArrayList<Roommate>(which.length);
+                                StringBuilder builder = new StringBuilder();
+                                for (int i : which) {
+                                    assignees.add(finalRoommates[i]);
+                                    builder.append(roomateNames[i]);
+                                    builder.append(", ");
+                                }
+                                assigneesEditText.setText(which.length > 0 ? builder.substring(0, builder.length() - 2) : builder.toString());
+                                chore.setAssignees(assignees);
                                 return true;
                             }
                         })
@@ -143,7 +164,13 @@ public class AddChoreFragment extends Fragment implements DatePickerDialog.OnDat
                         .show();
             }
         });
-
+        try {
+            Date d = chore.getDeadline();
+            dueEditText.setText(String.format("%2d/%2d/%4d %2d:%2d", d.getMonth(), d.getDate(),
+                    d.getYear(), d.getHours(), d.getMinutes()));
+        } catch (NullPointerException ne) {
+            Log.d("MOCK", "mock data npe");
+        }
         root.findViewById(R.id.doneTextView).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -157,7 +184,6 @@ public class AddChoreFragment extends Fragment implements DatePickerDialog.OnDat
                 mListener.onChoreDeleted(chore);
             }
         });
-
         return root;
     }
 

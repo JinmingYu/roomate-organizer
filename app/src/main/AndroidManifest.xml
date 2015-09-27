@@ -51,6 +51,10 @@
             android:name=".activity.addExpenseActivity"
             android:label="@string/title_activity_add_expense" >
         </activity>
+        <activity
+            android:name=".activity.ChoreActivity"
+            android:label="@string/title_activity_chore" >
+        </activity>
     </application>
 
 </manifest>
