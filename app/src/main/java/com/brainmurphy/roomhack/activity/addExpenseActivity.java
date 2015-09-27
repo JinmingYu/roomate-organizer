@@ -9,7 +9,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.brainmurphy.roomhack.Calculator;
 import com.brainmurphy.roomhack.R;
 import com.brainmurphy.roomhack.model.Expense;
 
@@ -46,8 +45,8 @@ public class addExpenseActivity extends ActionBarActivity {
                         Map<String, String> map = new HashMap<>();
                         map.put(EXPENSE_NAME, newExpense.getName());
                         map.put(EXPENSE_DESCRIPTION, Double.toString(newExpense.getCost()));
-                        Calculator.expenseDataMap.add(map);
-                        Calculator.expenseAdapter.notifyDataSetChanged();
+                        CalculatorActivity.expenseDataMap.add(map);
+                        CalculatorActivity.expenseAdapter.notifyDataSetChanged();
 
 
 
@@ -84,7 +83,7 @@ public class addExpenseActivity extends ActionBarActivity {
             String expenseCost = expenseNumber.getText().toString();
             double expenseNumber = Double.parseDouble(expenseCost);
             Expense newExpense = new Expense(expenseTitle, expenseNumber);
-            Calculator.expenseAdapter.notifyDataSetChanged();
+            CalculatorActivity.expenseAdapter.notifyDataSetChanged();
 
 
             //post now has id set.

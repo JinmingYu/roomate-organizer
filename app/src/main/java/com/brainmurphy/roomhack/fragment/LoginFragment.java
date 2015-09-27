@@ -1,4 +1,4 @@
-package com.brainmurphy.roomhack;
+package com.brainmurphy.roomhack.fragment;
 
 import android.content.Context;
 import android.content.Intent;
@@ -11,6 +11,8 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.brainmurphy.roomhack.CONST;
+import com.brainmurphy.roomhack.R;
 import com.brainmurphy.roomhack.activity.Dashboard;
 
 /**

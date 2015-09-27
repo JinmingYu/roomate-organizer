@@ -1,11 +1,7 @@
 package com.brainmurphy.roomhack.activity;
 
-import android.app.LoaderManager;
-import android.content.CursorLoader;
 import android.content.Intent;
-import android.content.Loader;
 import android.content.res.Configuration;
-import android.database.Cursor;
 import android.provider.ContactsContract;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -19,16 +15,13 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.SimpleAdapter;
-import android.widget.SimpleCursorAdapter;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.Toast;
 
 
-import com.brainmurphy.roomhack.Calculator;
 import com.brainmurphy.roomhack.R;
 import com.brainmurphy.roomhack.data.TaskDatasource;
 import com.brainmurphy.roomhack.model.Chore;
-import com.google.android.gms.gcm.Task;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -139,7 +132,7 @@ public class Dashboard extends ActionBarActivity {
 
 
     private void addDrawerItems() {
-        String[] osArray = { "Expense Calculator", "Chores", "My Room", "Settings", "Requests" };
+        String[] osArray = { "Expense CalculatorActivity", "Chores", "My Room", "Settings", "Requests" };
         ArrayAdapter = new ArrayAdapter<String>(this, R.layout.side_bar_item, osArray);
         mDrawerList.setAdapter(ArrayAdapter);
 
@@ -149,29 +142,29 @@ public class Dashboard extends ActionBarActivity {
                 long myid = id;
                 //calculator
                 if (id == 0) {
-                    Intent intent = new Intent(Dashboard.this, Calculator.class);
+                    Intent intent = new Intent(Dashboard.this, CalculatorActivity.class);
                     startActivity(intent);
                     Toast.makeText(getApplicationContext(), "another activity", Toast.LENGTH_SHORT).show();
 
                 }
                 //chores
                 if (id == 1) {
-                    Intent intent = new Intent(Dashboard.this, Calculator.class);
+                    Intent intent = new Intent(Dashboard.this, CalculatorActivity.class);
                     startActivity(intent);
                 }
                 //my room
                 if (id == 2) {
-                    Intent intent = new Intent(Dashboard.this, Calculator.class);
+                    Intent intent = new Intent(Dashboard.this, CalculatorActivity.class);
                     startActivity(intent);
                 }
                 //settings
                 if (id == 3) {
-                    Intent intent = new Intent(Dashboard.this, Calculator.class);
+                    Intent intent = new Intent(Dashboard.this, CalculatorActivity.class);
                     startActivity(intent);
                 }
                 //requests
                 if (id == 4) {
-                    Intent intent = new Intent(Dashboard.this, Calculator.class);
+                    Intent intent = new Intent(Dashboard.this, CalculatorActivity.class);
                     startActivity(intent);
                 }
             }

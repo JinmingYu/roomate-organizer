@@ -1,7 +1,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.brainmurphy.roomhack.Calculator">
+    tools:context="com.brainmurphy.roomhack.activity.CalculatorActivity">
     <item android:id="@+id/add"
         android:title="add"
         android:orderInCategory="100"

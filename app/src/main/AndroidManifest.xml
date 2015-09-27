@@ -41,7 +41,7 @@
             android:label="@string/title_activity_login" >
         </activity>
         <activity
-            android:name=".Calculator"
+            android:name=".activity.CalculatorActivity"
             android:label="@string/title_activity_calculator" >
         </activity>
         <activity
