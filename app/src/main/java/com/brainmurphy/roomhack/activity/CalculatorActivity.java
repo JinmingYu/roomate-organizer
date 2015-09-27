@@ -1,4 +1,4 @@
-package com.brainmurphy.roomhack;
+package com.brainmurphy.roomhack.activity;
 
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
@@ -10,6 +10,8 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.Toast;
+
+import com.brainmurphy.roomhack.R;
 import com.brainmurphy.roomhack.activity.addExpenseActivity;
 import com.brainmurphy.roomhack.data.ExpenseDatasource;
 import com.brainmurphy.roomhack.data.RoommatePayDatasource;
@@ -24,7 +26,7 @@ import java.util.Map;
 
 import retrofit.http.Body;
 
-public class Calculator extends ActionBarActivity {
+public class CalculatorActivity extends ActionBarActivity {
     ListView expenseList, roommatePay;
     ArrayList<Expense> expenses;
     String amountOwe, nameOwe;

@@ -15,11 +15,14 @@ public class Roommate {
     protected String ID;
     @SerializedName("chores")
     private ArrayList<Chore> chores;
-    @SerializedName("expenses")
-    private ArrayList<Expense> expenses = new ArrayList<>();
+    private ArrayList<Expense> expenses;
+    private ArrayList<Roommate> roommates;
+    private ArrayList<Request> requestsSent;
+    private ArrayList<Request> requestsReceived;
+    public boolean isUser;
 
 
-    public Roommate(String name, String ID, ArrayList<Chore> chores, ArrayList<Expense> expenses, ArrayList<Roommate> roommates, ArrayList<Request> requestsSent, ArrayList<Request> requestsReceived, double balance) {
+    public Roommate(String name, String ID, ArrayList<Chore> chores, ArrayList<Expense> expenses, ArrayList<Roommate> roommates, ArrayList<Request> requestsSent, ArrayList<Request> requestsReceived) {
         this.name = name;
         this.ID = ID;
         this.chores = chores;
@@ -29,7 +32,20 @@ public class Roommate {
 
     }
 
-    public void setBalance(double balance) {
+    public ArrayList<Request> getRequestsSent() {
+        return requestsSent;
+    }
+
+    public void setRequestsSent(ArrayList<Request> requestsSent) {
+        this.requestsSent = requestsSent;
+    }
+
+    public ArrayList<Request> getRequestsReceived() {
+        return requestsReceived;
+    }
+
+    public void setRequestsReceived(ArrayList<Request> requestsReceived) {
+        this.requestsReceived = requestsReceived;
     }
 
     public ArrayList<Chore> getChores()

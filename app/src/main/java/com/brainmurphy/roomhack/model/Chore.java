@@ -23,6 +23,7 @@ public class Chore {
     private int period;
     @SerializedName("isPeriodic")
     public boolean isPeriodic;
+    public String status;
 
     public int getPeriod()
     {
@@ -89,6 +90,38 @@ public class Chore {
 
     public void setAssignees(ArrayList<Roommate> assignees) {
         this.assignees = assignees;
+    }
+
+    public String getStatus()
+    {
+        return status;
+    }
+
+    public void setStatus (String status)
+    {
+        if (((status == "complete") || (status == "incomplete")) || (status == "overdue")) {
+            this.status = status;
+        }
+    }
+
+    public void complete ()
+    {
+        if (isPeriodic) {
+
+        }
+        else {
+            status = "complete";
+        }
+    }
+
+    public String updateStatus ()
+    {
+        Date current = new Date();
+        if ((deadline.before(current)) && (status != "complete"))
+        {
+            status = "overdue";
+        }
+        return status;
     }
 }
 

@@ -124,23 +124,6 @@ public class AddChoreFragment extends DialogFragment implements DatePickerDialog
         assigneesEditText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                RoommateDatasource datasource =null;
-//                        new RoommateDatasource() {
-//                    private ArrayList<Roommate> roomates = new ArrayList<>();
-//
-//                    @Override
-//                    public List<Roommate> getRoomates() {
-//                        return roomates;
-//                    }
-//
-//                    @Override
-//                    public Roommate postRoomate(@Body Roommate roomate) {
-//                        roomates.add(roomate);
-//                        return roomate;
-//                    }
-//                };
-                datasource.postRoomate(new Roommate("brain", "0", null, null, null, null, null, 0));
-                datasource.postRoomate(new Roommate("biff", "1", null, null, null, null, null, 0));
                 Roommate[] roomates = new Roommate[chore.getAssignees().size()];
                 roomates = chore.getAssignees().toArray(roomates);
                 final Roommate[] finalRoommates = roomates;

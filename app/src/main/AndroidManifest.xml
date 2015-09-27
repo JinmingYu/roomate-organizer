@@ -17,11 +17,6 @@
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
-
-        <activity
-            android:name=".activity.Dashboard"
-            android:label="@string/title_activity_dashboard" >
-        </activity>
         <activity
             android:name=".activity.MainActivity"
             android:label="@string/title_activity_main" >
@@ -32,6 +27,12 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".activity.Dashboard"
+            android:label="@string/title_activity_dashboard" >
+        </activity>
+
+
+        <activity
             android:name=".activity.RegisterActivity"
             android:label="@string/title_activity_register" >
         </activity>
@@ -40,7 +41,7 @@
             android:label="@string/title_activity_login" >
         </activity>
         <activity
-            android:name=".Calculator"
+            android:name=".activity.CalculatorActivity"
             android:label="@string/title_activity_calculator" >
         </activity>
         <activity
