@@ -40,9 +40,9 @@ public class ChoreActivity extends AppCompatActivity implements AddChoreFragment
         ArrayList<Chore> chore = new ArrayList<Chore>();
         ArrayList<Expense> expense = new ArrayList<Expense>();
         ArrayList<Roommate> roommate = new ArrayList<Roommate>();
-        Roommate brian = new Roommate("", "", chore, expense, roommate, new ArrayList<Request>(), new ArrayList<Request>(), 0);
+        Roommate brian = new Roommate("", "", chore, expense, roommate, new ArrayList<Request>(), new ArrayList<Request>());
         brian.setName("Brian");
-        Roommate matt = new Roommate("", "", chore, expense, roommate, new ArrayList<Request>(), new ArrayList<Request>(), 0);
+        Roommate matt = new Roommate("", "", chore, expense, roommate, new ArrayList<Request>(), new ArrayList<Request>());
         ArrayList<Roommate> roomates = new ArrayList<Roommate>();
         roomates.add(brian);
         roomates.add(matt);

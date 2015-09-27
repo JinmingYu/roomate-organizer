@@ -17,11 +17,6 @@
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
-
-        <activity
-            android:name=".activity.Dashboard"
-            android:label="@string/title_activity_dashboard" >
-        </activity>
         <activity
             android:name=".activity.MainActivity"
             android:label="@string/title_activity_main" >
@@ -31,6 +26,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".activity.Dashboard"
+            android:label="@string/title_activity_dashboard" >
+        </activity>
+
+
         <activity
             android:name=".activity.RegisterActivity"
             android:label="@string/title_activity_register" >
