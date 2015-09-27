@@ -13,10 +13,10 @@ public class Roommate {
     private ArrayList<Roommate> roommates;
     private ArrayList<Request> requestsSent;
     private ArrayList<Request> requestsReceived;
-    private double balance;
+    public boolean isUser;
 
 
-    public Roommate(String name, String ID, ArrayList<Chore> chores, ArrayList<Expense> expenses, ArrayList<Roommate> roommates, ArrayList<Request> requestsSent, ArrayList<Request> requestsReceived, double balance) {
+    public Roommate(String name, String ID, ArrayList<Chore> chores, ArrayList<Expense> expenses, ArrayList<Roommate> roommates, ArrayList<Request> requestsSent, ArrayList<Request> requestsReceived) {
         this.name = name;
         this.ID = ID;
         this.chores = chores;
@@ -24,11 +24,6 @@ public class Roommate {
         this.roommates = roommates;
         this.requestsSent = requestsSent;
         this.requestsReceived = requestsReceived;
-        this.balance = balance;
-    }
-
-    public void setBalance(double balance) {
-        this.balance = balance;
     }
 
     public ArrayList<Request> getRequestsSent() {
@@ -108,5 +103,4 @@ public class Roommate {
     ArrayList<Chore> chore = new ArrayList<Chore>();
     ArrayList<Expense> expense = new ArrayList<Expense>();
     ArrayList<Roommate> roommate = new ArrayList<Roommate>();
-    public Roommate user = new Roommate ("", "", chore, expense, roommate, new ArrayList<Request>(), new ArrayList<Request>(), 0);
 }
