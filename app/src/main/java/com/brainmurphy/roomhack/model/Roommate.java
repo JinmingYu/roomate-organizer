@@ -26,6 +26,9 @@ public class Roommate {
         this.requestsReceived = requestsReceived;
         this.balance = balance;
     }
+    public Roommate() {
+
+    }
 
     public void setBalance(double balance) {
         this.balance = balance;
@@ -108,5 +111,4 @@ public class Roommate {
     ArrayList<Chore> chore = new ArrayList<Chore>();
     ArrayList<Expense> expense = new ArrayList<Expense>();
     ArrayList<Roommate> roommate = new ArrayList<Roommate>();
-    public Roommate user = new Roommate ("", "", chore, expense, roommate, new ArrayList<Request>(), new ArrayList<Request>(), 0);
 }

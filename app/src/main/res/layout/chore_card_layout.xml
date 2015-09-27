@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_gravity="center"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context="com.brainmurphy.roomhack.fragment.AddChoreFragment"
+        android:padding="10dp"
+        android:id="@+id/choreLayout" >
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/titleTextView"
+            android:text="Title"
+            android:textSize="40dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="10dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:id="@+id/descriptionTextView"
+            android:layout_marginTop="30dp"
+            android:text="description"
+            android:textSize="25dp"
+            android:layout_below="@+id/titleTextView"
+            android:layout_alignLeft="@+id/titleEditText"
+            android:layout_alignStart="@+id/titleEditText" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:id="@+id/dueTextView"
+            android:layout_marginTop="30dp"
+            android:text="due"
+            android:textSize="25dp"
+            android:layout_below="@+id/descriptionTextView"
+            android:layout_alignLeft="@+id/descriptionTextView"
+            android:layout_alignStart="@+id/descriptionTextView" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:id="@+id/assigneesTextView"
+            android:layout_marginTop="30dp"
+            android:text="assignees"
+            android:textSize="25dp"
+            android:layout_below="@+id/dueTextView"
+            android:layout_alignLeft="@+id/dueTextView"
+            android:layout_alignStart="@+id/dueTextView"
+            android:elegantTextHeight="false" />
+
+    </RelativeLayout>
+
+
+
+</android.support.v7.widget.CardView>

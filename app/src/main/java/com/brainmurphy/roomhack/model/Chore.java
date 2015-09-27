@@ -1,6 +1,7 @@
 package com.brainmurphy.roomhack.model;
 
 
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -9,7 +10,7 @@ import java.util.Date;
 public class Chore {
     private String name;
     private String description;
-    private Roommate doer;
+    private ArrayList<Roommate> assignees;
     private Date deadline;
     private int period;
     public boolean isPeriodic;
@@ -30,9 +31,8 @@ public class Chore {
 
     }
 
-    public Chore(String name, Roommate doer, Date deadline, int period, boolean isPeriodic) {
+    public Chore(String name, Date deadline, int period, boolean isPeriodic) {
         this.name = name;
-        this.doer = doer;
         this.deadline = deadline;
         this.period = period;
         this.isPeriodic = isPeriodic;
@@ -44,14 +44,6 @@ public class Chore {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public Roommate getDoer() {
-        return doer;
-    }
-
-    public void setDoer(Roommate doer) {
-        this.doer = doer;
     }
 
     public Date getDeadline() {
@@ -80,6 +72,14 @@ public class Chore {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public ArrayList<Roommate> getAssignees() {
+        return assignees;
+    }
+
+    public void setAssignees(ArrayList<Roommate> assignees) {
+        this.assignees = assignees;
     }
 }
 
