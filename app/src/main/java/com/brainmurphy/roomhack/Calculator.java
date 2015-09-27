@@ -12,7 +12,9 @@ import android.widget.SimpleAdapter;
 import android.widget.Toast;
 import com.brainmurphy.roomhack.activity.addExpenseActivity;
 import com.brainmurphy.roomhack.data.ExpenseDatasource;
+import com.brainmurphy.roomhack.data.RoommatePayDatasource;
 import com.brainmurphy.roomhack.model.Expense;
+import com.brainmurphy.roomhack.model.Roommate;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -22,95 +24,94 @@ import java.util.Map;
 import retrofit.http.Body;
 
 public class Calculator extends ActionBarActivity {
-    ListView listView;
+    ListView expenseList, roommatePayList;
     ArrayList<Expense> expenses;
-    public static List<Map<String, String>> dataMap;
+    public static List<Map<String, String>> expenseDataMap;
+    public static List<Map<String, Double>> roommatePayDataMap;
     // This is the Adapter being used to display the list's data
-    public static SimpleAdapter mAdapter;
+    public static SimpleAdapter expenseAdapter, roommatePayAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calculator);
         // Get ListView object from xml
-        listView = (ListView) findViewById(R.id.listView);
+        expenseList = (ListView) findViewById(R.id.expenseList);
+        roommatePayList = (ListView) findViewById(R.id.roommatePay);
+
 
 
         // For the cursor adapter, specify which columns go into which views
         final String EXPENSE_NAME = "expenseName";
         final String EXPENSE_DESCRIPTION = "expenseNumber";
-        String[] fromColumns = {EXPENSE_NAME};
-        int[] toViews = {android.R.id.text1}; // The TextView in simple_list_item_1
+        final String FROM_ROOMMATE = "fromroommate";
+        String[] fromColumns = {EXPENSE_NAME, EXPENSE_DESCRIPTION};
+        String[] roommatePayColumn = {FROM_ROOMMATE};
+        int[] toViews = {R.id.name, R.id.number}; // The TextView in simple_list_item_1
+        int[] roommatePayToViews = {android.R.id.text1};
 
         ExpenseDatasource expenseDatasource = new ExpenseDatasource() {
-
             private ArrayList<Expense> list = new ArrayList<>();
             @Override
             public List<Expense> getExpenses() {
                 return list;
             }
-
             @Override
             public List<Expense> getExpenses(int roommateId) {
                 return list;
             }
-
             @Override
             public void postExpense(@Body Expense expense) {
                 list.add(expense);
             }
         };
+        RoommatePayDatasource roommatePayDatasource = new RoommatePayDatasource() {
+            private ArrayList<Double> list = new ArrayList<>();
+            @Override
+            public List<Double> getroommatePays() {
+                return list;
+            }
+            @Override
+            public List<Double> getroommatePays(int roommateId) {
+                return list;
+            }
+            @Override
+            public void postRoommatePay(@Body String roommateName, double roommmateOwe) {
+                list.add(roommmateOwe);
+            }
+        };
+
+
+        expenseDataMap = new ArrayList<>();
+        roommatePayDataMap = new ArrayList<>();
         expenseDatasource.postExpense(new Expense("Rent", 1400));
         expenseDatasource.postExpense(new Expense("internet", 50));
         List<Expense> expenses = expenseDatasource.getExpenses();
 
-        dataMap = new ArrayList<>();
+        roommatePayDatasource.postRoommatePay("Yufeng", 40);
+        roommatePayDatasource.postRoommatePay("Yichen", 40);
+        List<Double> roommatePays = roommatePayDatasource.getroommatePays();
         for (Expense expense : expenses) {
             Map<String, String> map = new HashMap<>();
             map.put(EXPENSE_NAME, expense.getName());
-            dataMap.add(map);
+            map.put(EXPENSE_DESCRIPTION, Double.toString(expense.getCost()));
+            expenseDataMap.add(map);
         }
-        mAdapter = new SimpleAdapter(this, dataMap,
-                android.R.layout.simple_list_item_1,
+        for (Double roommatePay : roommatePays) {
+            Map<String, Double> map = new HashMap<>();
+            map.put(EXPENSE_NAME, roommatePay);
+            map.put(EXPENSE_DESCRIPTION, roommatePay);
+            roommatePayDataMap.add(map);
+        }
+        expenseAdapter = new SimpleAdapter(this, expenseDataMap,
+                R.layout.calculator_expense_item,
                 fromColumns, toViews);
-        listView.setAdapter(mAdapter);
+        roommatePayAdapter = new SimpleAdapter(this, roommatePayDataMap,
+                R.layout.calculator_expense_item,
+                roommatePayColumn, roommatePayToViews);
+        expenseList.setAdapter(expenseAdapter);
+        roommatePayList.setAdapter(roommatePayAdapter);
 
-
-//        // create the grid item mapping
-//        String[] from = new String[] {"name", "number"};
-//        int[] to = new int[] { R.id.name, R.id.number};
-//        // Defined Array values to show in ListView
-//        String[] values = new String[] { "Rent",
-//                "Electricity",
-//                "Internet",
-//        };
-//
-//        // Define a new Adapter
-//        // First parameter - Context
-//        // Second parameter - Layout for the row
-//        // Third parameter - ID of the TextView to which the data is written
-//        // Forth - the Array of data
-//
-//        HashMap<String, String> hashMapRent = new HashMap<String, String>();
-//        hashMapRent.put("rent", "1400");
-//
-//        // prepare the list of all records
-//        List<HashMap<String, String>> fillMaps = new ArrayList<>();
-//        fillMaps.add(hashMapRent);
-//        fillMaps.add(hashMapRent);
-//        fillMaps.add(hashMapRent);
-//        fillMaps.add(hashMapRent);
-//
-//        fillMaps.add(hashMapRent);
-//
-//
-//        // fill in the grid_item layout
-//        adapter = new SimpleAdapter(this, fillMaps, R.layout.calculator_expense_item, from, to);
-//
-//        // Assign adapter to ListView
-//        listView.setAdapter(adapter);
-
-        // ListView Item Click Listener
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        expenseList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view,
@@ -120,7 +121,7 @@ public class Calculator extends ActionBarActivity {
                 int itemPosition     = position;
 
                 // ListView Clicked item value
-                String  itemValue    = (String) listView.getItemAtPosition(position);
+                String  itemValue    = (String) expenseList.getItemAtPosition(position);
 
                 // Show Alert
                 Toast.makeText(getApplicationContext(),
@@ -131,29 +132,6 @@ public class Calculator extends ActionBarActivity {
 
         });
 
-
-
-//        // Defined Array values to show in ListView
-//        expenses = new ArrayList<Expense>();
-//        ArrayList<String> expenseNames = new ArrayList<String>();
-//        ArrayList<Double> expenseNumbers = new ArrayList<Double>();
-//        expenses.add(new Expense(1400, "rent"));
-//        //get the arraylist of the expense names and numbers
-//        for (Expense expense: expenses) {
-//            expenseNames.add(expense.getName());
-//            Double cost = expense.getCost();
-//        }
-//
-//
-//        // Define a new Adapter
-//        // First parameter - Context
-//        // Second parameter - Layout for the row
-//        // Third parameter - ID of the TextView to which the data is written
-//        // Forth - the Array of data
-//
-//        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-//                R.layout.calculator_expense_item, android.R.id.text1, expenseNames);
-//        listView.setAdapter(adapter);
     }
 
     @Override
