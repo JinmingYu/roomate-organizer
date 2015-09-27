@@ -7,7 +7,10 @@
     android:orientation="vertical"
     tools:context="com.brainmurphy.roomhack.Calculator">
 
-
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Money you paid: "/>
     <ListView
         android:layout_width="wrap_content"
         android:layout_height="185dp"
@@ -15,7 +18,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="--------------"/>
+        android:text="Now transactions start......"/>
     <ListView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

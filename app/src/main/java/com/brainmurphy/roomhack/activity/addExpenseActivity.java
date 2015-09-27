@@ -45,6 +45,7 @@ public class addExpenseActivity extends ActionBarActivity {
                         Expense newExpense = new Expense(expenseTitle,expenseNumber);
                         Map<String, String> map = new HashMap<>();
                         map.put(EXPENSE_NAME, newExpense.getName());
+                        map.put(EXPENSE_DESCRIPTION, Double.toString(newExpense.getCost()));
                         Calculator.expenseDataMap.add(map);
                         Calculator.expenseAdapter.notifyDataSetChanged();
 

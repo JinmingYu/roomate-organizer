@@ -12,6 +12,8 @@ import com.brainmurphy.roomhack.ChoreCardAdapter;
 import com.brainmurphy.roomhack.R;
 import com.brainmurphy.roomhack.fragment.AddChoreFragment;
 import com.brainmurphy.roomhack.model.Chore;
+import com.brainmurphy.roomhack.model.Expense;
+import com.brainmurphy.roomhack.model.Request;
 import com.brainmurphy.roomhack.model.Roommate;
 
 import java.util.ArrayList;
@@ -35,10 +37,12 @@ public class ChoreActivity extends AppCompatActivity implements AddChoreFragment
         // use a linear layout manager
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
-
-        Roommate brian = new Roommate();
+        ArrayList<Chore> chore = new ArrayList<Chore>();
+        ArrayList<Expense> expense = new ArrayList<Expense>();
+        ArrayList<Roommate> roommate = new ArrayList<Roommate>();
+        Roommate brian = new Roommate("", "", chore, expense, roommate, new ArrayList<Request>(), new ArrayList<Request>(), 0);
         brian.setName("Brian");
-        Roommate matt = new Roommate();
+        Roommate matt = new Roommate("", "", chore, expense, roommate, new ArrayList<Request>(), new ArrayList<Request>(), 0);
         ArrayList<Roommate> roomates = new ArrayList<Roommate>();
         roomates.add(brian);
         roomates.add(matt);
