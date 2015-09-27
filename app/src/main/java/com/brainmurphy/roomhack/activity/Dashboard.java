@@ -77,7 +77,6 @@ public class Dashboard extends ActionBarActivity {
                 LayoutParams.WRAP_CONTENT));
         progressBar.setIndeterminate(true);
         mNotificationList.setEmptyView(progressBar);
-//may be use a fragment here
         // Must add the progress bar to the root of the layout
         ViewGroup root = (ViewGroup) findViewById(android.R.id.content);
         root.addView(progressBar);

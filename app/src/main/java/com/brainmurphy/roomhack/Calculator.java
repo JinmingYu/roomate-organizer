@@ -1,7 +1,7 @@
 package com.brainmurphy.roomhack;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -10,19 +10,23 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.Toast;
-
 import com.brainmurphy.roomhack.activity.addExpenseActivity;
+import com.brainmurphy.roomhack.data.ExpenseDatasource;
 import com.brainmurphy.roomhack.model.Expense;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-public class Calculator extends AppCompatActivity {
+import retrofit.http.Body;
+
+public class Calculator extends ActionBarActivity {
     ListView listView;
     ArrayList<Expense> expenses;
-    public static SimpleAdapter adapter;
-
+    public static List<Map<String, String>> dataMap;
+    // This is the Adapter being used to display the list's data
+    public static SimpleAdapter mAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,33 +35,79 @@ public class Calculator extends AppCompatActivity {
         listView = (ListView) findViewById(R.id.listView);
 
 
-        // create the grid item mapping
-        String[] from = new String[] {"name", "number"};
-        int[] to = new int[] { R.id.name, R.id.number};
-        // Defined Array values to show in ListView
-        String[] values = new String[] { "Rent",
-                "Electricity",
-                "Internet",
+        // For the cursor adapter, specify which columns go into which views
+        final String EXPENSE_NAME = "expenseName";
+        final String EXPENSE_DESCRIPTION = "expenseNumber";
+        String[] fromColumns = {EXPENSE_NAME};
+        int[] toViews = {android.R.id.text1}; // The TextView in simple_list_item_1
+
+        ExpenseDatasource expenseDatasource = new ExpenseDatasource() {
+
+            private ArrayList<Expense> list = new ArrayList<>();
+            @Override
+            public List<Expense> getExpenses() {
+                return list;
+            }
+
+            @Override
+            public List<Expense> getExpenses(int roommateId) {
+                return list;
+            }
+
+            @Override
+            public void postExpense(@Body Expense expense) {
+                list.add(expense);
+            }
         };
+        expenseDatasource.postExpense(new Expense("Rent", 1400));
+        expenseDatasource.postExpense(new Expense("internet", 50));
+        List<Expense> expenses = expenseDatasource.getExpenses();
 
-        // Define a new Adapter
-        // First parameter - Context
-        // Second parameter - Layout for the row
-        // Third parameter - ID of the TextView to which the data is written
-        // Forth - the Array of data
+        dataMap = new ArrayList<>();
+        for (Expense expense : expenses) {
+            Map<String, String> map = new HashMap<>();
+            map.put(EXPENSE_NAME, expense.getName());
+            dataMap.add(map);
+        }
+        mAdapter = new SimpleAdapter(this, dataMap,
+                android.R.layout.simple_list_item_1,
+                fromColumns, toViews);
+        listView.setAdapter(mAdapter);
 
-        HashMap<String, Double> hashMapRent = new HashMap<String, Double>();
-        hashMapRent.put("rent", 1400d);
 
-        // prepare the list of all records
-        List<HashMap<String, Double>> fillMaps = new ArrayList<>();
-        fillMaps.add(hashMapRent);
-
-        // fill in the grid_item layout
-        adapter = new SimpleAdapter(this, fillMaps, R.layout.calculator_expense_item, from, to);
-
-        // Assign adapter to ListView
-        listView.setAdapter(adapter);
+//        // create the grid item mapping
+//        String[] from = new String[] {"name", "number"};
+//        int[] to = new int[] { R.id.name, R.id.number};
+//        // Defined Array values to show in ListView
+//        String[] values = new String[] { "Rent",
+//                "Electricity",
+//                "Internet",
+//        };
+//
+//        // Define a new Adapter
+//        // First parameter - Context
+//        // Second parameter - Layout for the row
+//        // Third parameter - ID of the TextView to which the data is written
+//        // Forth - the Array of data
+//
+//        HashMap<String, String> hashMapRent = new HashMap<String, String>();
+//        hashMapRent.put("rent", "1400");
+//
+//        // prepare the list of all records
+//        List<HashMap<String, String>> fillMaps = new ArrayList<>();
+//        fillMaps.add(hashMapRent);
+//        fillMaps.add(hashMapRent);
+//        fillMaps.add(hashMapRent);
+//        fillMaps.add(hashMapRent);
+//
+//        fillMaps.add(hashMapRent);
+//
+//
+//        // fill in the grid_item layout
+//        adapter = new SimpleAdapter(this, fillMaps, R.layout.calculator_expense_item, from, to);
+//
+//        // Assign adapter to ListView
+//        listView.setAdapter(adapter);
 
         // ListView Item Click Listener
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {

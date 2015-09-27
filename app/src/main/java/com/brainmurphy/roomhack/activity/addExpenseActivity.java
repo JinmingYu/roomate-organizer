@@ -13,10 +13,15 @@ import com.brainmurphy.roomhack.Calculator;
 import com.brainmurphy.roomhack.R;
 import com.brainmurphy.roomhack.model.Expense;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class addExpenseActivity extends ActionBarActivity {
     private EditText expenseName;
     private EditText expenseNumber;
     Button btnAdd;
+    final String EXPENSE_NAME = "expenseName";
+    final String EXPENSE_DESCRIPTION = "expenseNumber";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,8 +42,12 @@ public class addExpenseActivity extends ActionBarActivity {
                         String expenseTitle = expenseName.getText().toString();
                         String expenseCost = expenseNumber.getText().toString();
                         double expenseNumber = Double.parseDouble(expenseCost);
-                        Expense newExpense = new Expense(expenseNumber, expenseTitle);
-                        Calculator.adapter.notifyDataSetChanged();
+                        Expense newExpense = new Expense(expenseTitle,expenseNumber);
+                        Map<String, String> map = new HashMap<>();
+                        map.put(EXPENSE_NAME, newExpense.getName());
+                        Calculator.dataMap.add(map);
+                        Calculator.mAdapter.notifyDataSetChanged();
+
 
 
                         //post now has id set.
@@ -73,8 +82,8 @@ public class addExpenseActivity extends ActionBarActivity {
             String expenseTitle = expenseName.getText().toString();
             String expenseCost = expenseNumber.getText().toString();
             double expenseNumber = Double.parseDouble(expenseCost);
-            Expense newExpense = new Expense(expenseNumber, expenseTitle);
-            Calculator.adapter.notifyDataSetChanged();
+            Expense newExpense = new Expense(expenseTitle, expenseNumber);
+            Calculator.mAdapter.notifyDataSetChanged();
 
 
             //post now has id set.

@@ -25,9 +25,9 @@
     <EditText
         android:id="@+id/expenseNumber"
         android:layout_width="match_parent"
-        android:inputType="textPassword"
         android:layout_marginBottom="10dp"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:inputType="numberDecimal" />
 
     <Button
         android:layout_width="match_parent"
