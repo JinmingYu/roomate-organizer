@@ -55,6 +55,10 @@
             android:name=".activity.ChoreActivity"
             android:label="@string/title_activity_chore" >
         </activity>
+        <activity
+            android:name=".activity.TestRetrofitActivity"
+            android:label="@string/title_activity_test_retrofit" >
+        </activity>
     </application>
 
 </manifest>

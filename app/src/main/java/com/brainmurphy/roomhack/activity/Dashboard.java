@@ -156,7 +156,7 @@ public class Dashboard extends ActionBarActivity {
                 }
                 //chores
                 if (id == 1) {
-                    Intent intent = new Intent(Dashboard.this, Calculator.class);
+                    Intent intent = new Intent(Dashboard.this, ChoreActivity.class);
                     startActivity(intent);
                 }
                 //my room

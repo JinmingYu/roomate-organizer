@@ -1,6 +1,6 @@
 package com.brainmurphy.roomhack.activity;
 
-import android.app.Fragment;
+import android.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -22,9 +22,12 @@ public class ChoreActivity extends AppCompatActivity implements AddChoreFragment
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager layoutManager;
 
+    private ArrayList<Chore> chores;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setTitle("Chores");
         setContentView(R.layout.activity_chore);
         recyclerView = (RecyclerView) findViewById(R.id.card_recyler_view);
 
@@ -54,17 +57,20 @@ public class ChoreActivity extends AppCompatActivity implements AddChoreFragment
         c2.setDescription("Lorem ipsum dolor sit amet");
         c2.setAssignees(roomates);
 
-        Chore[] chores = new Chore[]{c1,c2};
+        chores = new ArrayList<>();
+
+        chores.add(c1);
+        chores.add(c2);
 
         // specify an adapter (see also next example)
-        adapter = new ChoreCardAdapter(this, chores);
+        adapter = new ChoreCardAdapter(this);
         recyclerView.setAdapter(adapter);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_chore, menu);
+        getMenuInflater().inflate(R.menu.menu_calculator, menu);
         return true;
     }
 
@@ -76,7 +82,10 @@ public class ChoreActivity extends AppCompatActivity implements AddChoreFragment
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.add) {
+            getFragmentManager().beginTransaction()
+                    .add(new AddChoreFragment(), ChoreCardAdapter.CHORE_FRAG_TAG_PREFIX)
+                    .commit();
             return true;
         }
 
@@ -85,20 +94,23 @@ public class ChoreActivity extends AppCompatActivity implements AddChoreFragment
 
     @Override
     public void onChoreAdded(Chore chore) {
-        Fragment frag = getFragmentManager().findFragmentByTag(ChoreCardAdapter.CHORE_FRAG_TAG_PREFIX);
-        getFragmentManager().beginTransaction()
-                .remove(frag)
-                .commit();
-        //TODO update cards if chore new
+        DialogFragment frag = (DialogFragment) getFragmentManager().findFragmentByTag(ChoreCardAdapter.CHORE_FRAG_TAG_PREFIX);
+        frag.dismiss();
+        if (!chores.contains(chore)) {
+            chores.add(chore);
+        }
+        adapter.notifyDataSetChanged();
     }
 
     @Override
     public void onChoreDeleted(Chore chore) {
-        Fragment frag = getFragmentManager().findFragmentByTag(ChoreCardAdapter.CHORE_FRAG_TAG_PREFIX);
-        getFragmentManager().beginTransaction()
-                .remove(frag)
-                .commit();
+        DialogFragment frag = (DialogFragment) getFragmentManager().findFragmentByTag(ChoreCardAdapter.CHORE_FRAG_TAG_PREFIX);
+        frag.dismiss();
+        chores.remove(chore);
+        adapter.notifyDataSetChanged();
+    }
 
-        //TODO remove chore
+    public ArrayList<Chore> getChores() {
+        return chores;
     }
 }

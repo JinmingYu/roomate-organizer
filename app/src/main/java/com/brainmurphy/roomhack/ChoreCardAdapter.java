@@ -10,17 +10,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.brainmurphy.roomhack.data.RoommateDatasource;
+import com.brainmurphy.roomhack.activity.ChoreActivity;
 import com.brainmurphy.roomhack.fragment.AddChoreFragment;
-import com.brainmurphy.roomhack.fragment.ChoreFragment;
 import com.brainmurphy.roomhack.model.Chore;
 import com.brainmurphy.roomhack.model.Roommate;
-import com.google.android.gms.games.multiplayer.realtime.Room;
 
+import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
-
-import retrofit.Retrofit;
 
 /**
  * Created by brian on 9/26/15.
@@ -29,12 +25,10 @@ public class ChoreCardAdapter extends RecyclerView.Adapter<ChoreCardAdapter.View
 
     public static String CHORE_FRAG_TAG_PREFIX = "choreFrag#";
 
-    private Activity context;
-    Chore[] chores;
+    private ChoreActivity context;
 
-    public ChoreCardAdapter(Activity context, Chore[] chores) {
+    public ChoreCardAdapter(ChoreActivity context) {
         this.context = context;
-        this.chores = chores;
     }
 
     @Override
@@ -50,7 +44,7 @@ public class ChoreCardAdapter extends RecyclerView.Adapter<ChoreCardAdapter.View
 
     @Override
     public void onBindViewHolder(ChoreCardAdapter.ViewHolder holder, final int position) {
-        final Chore chore = chores[position];
+        final Chore chore = context.getChores().get(position);
         View root = holder.view;
         ((TextView) root.findViewById(R.id.titleTextView)).setText(chore.getName());
         ((TextView) root.findViewById(R.id.descriptionTextView)).setText(chore.getDescription());
@@ -83,7 +77,7 @@ public class ChoreCardAdapter extends RecyclerView.Adapter<ChoreCardAdapter.View
 
     @Override
     public int getItemCount() {
-        return chores.length;
+        return context.getChores().size();
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {

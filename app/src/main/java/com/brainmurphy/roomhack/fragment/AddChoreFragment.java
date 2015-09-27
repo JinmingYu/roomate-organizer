@@ -88,6 +88,7 @@ public class AddChoreFragment extends DialogFragment implements DatePickerDialog
             }
         });
         EditText descriptionEditText = ((EditText) root.findViewById(R.id.descriptionEditText));
+        descriptionEditText.setText(chore.getDescription());
         descriptionEditText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -112,27 +113,32 @@ public class AddChoreFragment extends DialogFragment implements DatePickerDialog
 
         final EditText assigneesEditText = (EditText) root.findViewById(R.id.assigneesEditText);
         StringBuilder builder = new StringBuilder();
-        for (Roommate roomate : chore.getAssignees()) {
-            builder.append(roomate.getName());
-            builder.append(", ");
+        if (chore.getAssignees() != null) {
+            for (Roommate roomate : chore.getAssignees()) {
+                builder.append(roomate.getName());
+                builder.append(", ");
+            }
+
+            assigneesEditText.setText(chore.getAssignees().size() > 0 ? builder.substring(0, builder.length() - 2) : builder.toString());
         }
-        assigneesEditText.setText(chore.getAssignees().size() > 0 ? builder.substring(0, builder.length() - 2) : builder.toString());
         assigneesEditText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                RoommateDatasource datasource = new RoommateDatasource() {
-                    private ArrayList<Roommate> roomates = new ArrayList<>();
-
-                    @Override
-                    public List<Roommate> getRoomates() {
-                        return roomates;
-                    }
-
-                    @Override
-                    public void postRoomate(@Body Roommate roomate) {
-                        roomates.add(roomate);
-                    }
-                };
+                RoommateDatasource datasource =null;
+//                        new RoommateDatasource() {
+//                    private ArrayList<Roommate> roomates = new ArrayList<>();
+//
+//                    @Override
+//                    public List<Roommate> getRoomates() {
+//                        return roomates;
+//                    }
+//
+//                    @Override
+//                    public Roommate postRoomate(@Body Roommate roomate) {
+//                        roomates.add(roomate);
+//                        return roomate;
+//                    }
+//                };
                 datasource.postRoomate(new Roommate("brain", "0", null, null, null, null, null, 0));
                 datasource.postRoomate(new Roommate("biff", "1", null, null, null, null, null, 0));
                 Roommate[] roomates = new Roommate[chore.getAssignees().size()];

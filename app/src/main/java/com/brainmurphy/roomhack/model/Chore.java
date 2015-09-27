@@ -1,6 +1,8 @@
 package com.brainmurphy.roomhack.model;
 
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -8,11 +10,18 @@ import java.util.Date;
  * Created by Matt on 9/26/2015.
  */
 public class Chore {
+
+    @SerializedName("name")
     private String name;
+    @SerializedName("description")
     private String description;
-    private ArrayList<Roommate> assignees;
+    @SerializedName("assignees")
+    private ArrayList<Roommate> assignees = new ArrayList<>();
+    @SerializedName("deadlines")
     private Date deadline;
+    @SerializedName("period")
     private int period;
+    @SerializedName("isPeriodic")
     public boolean isPeriodic;
 
     public int getPeriod()

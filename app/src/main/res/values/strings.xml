@@ -22,4 +22,5 @@
     <string name="title_activity_add_chore">Add Chore</string>
     <string name="title_activity_add_expense">addExpense</string>
     <string name="title_activity_chore">ChoreActivity</string>
+    <string name="title_activity_test_retrofit">TestRetrofitActivity</string>
 </resources>

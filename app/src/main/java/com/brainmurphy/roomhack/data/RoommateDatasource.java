@@ -4,6 +4,7 @@ import com.brainmurphy.roomhack.model.Roommate;
 
 import java.util.List;
 
+import retrofit.Call;
 import retrofit.http.Body;
 import retrofit.http.GET;
 import retrofit.http.POST;
@@ -13,7 +14,7 @@ import retrofit.http.POST;
  */
 public interface RoommateDatasource {
     @GET("/roomates")
-    public List<Roommate> getRoomates();
+    public Call<List<Roommate>> getRoomates();
     @POST("/roomates")
-    public void postRoomate(@Body Roommate roomate);
+    public Call<Roommate> postRoomate(@Body Roommate roomate);
 }

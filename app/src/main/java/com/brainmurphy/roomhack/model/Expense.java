@@ -1,13 +1,18 @@
 package com.brainmurphy.roomhack.model;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.ArrayList;
 
 /**
  * Created by Matt on 9/26/2015.
  */
 public class Expense {
+    @SerializedName("cost")
     private double cost;
+    @SerializedName("name")
     private String name;
+    @SerializedName("payees")
     private ArrayList<Roommate> payees;
 
     public Expense(String name, double cost) {
@@ -41,7 +46,7 @@ public class Expense {
         return payees;
     }
 
-    public void setPayee(ArrayList<Roommate> payees) {
+    public void setPayees(ArrayList<Roommate> payees) {
         this.payees = payees;
     }
 }

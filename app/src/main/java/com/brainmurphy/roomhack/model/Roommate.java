@@ -1,19 +1,22 @@
 package com.brainmurphy.roomhack.model;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * General Roommate Class
  */
 public class Roommate {
+    @SerializedName("name")
     protected String name;
+    @SerializedName("ID")
     protected String ID;
+    @SerializedName("chores")
     private ArrayList<Chore> chores;
-    private ArrayList<Expense> expenses;
-    private ArrayList<Roommate> roommates;
-    private ArrayList<Request> requestsSent;
-    private ArrayList<Request> requestsReceived;
-    private double balance;
+    @SerializedName("expenses")
+    private ArrayList<Expense> expenses = new ArrayList<>();
 
 
     public Roommate(String name, String ID, ArrayList<Chore> chores, ArrayList<Expense> expenses, ArrayList<Roommate> roommates, ArrayList<Request> requestsSent, ArrayList<Request> requestsReceived, double balance) {
@@ -21,33 +24,12 @@ public class Roommate {
         this.ID = ID;
         this.chores = chores;
         this.expenses = expenses;
-        this.roommates = roommates;
-        this.requestsSent = requestsSent;
-        this.requestsReceived = requestsReceived;
-        this.balance = balance;
     }
     public Roommate() {
 
     }
 
     public void setBalance(double balance) {
-        this.balance = balance;
-    }
-
-    public ArrayList<Request> getRequestsSent() {
-        return requestsSent;
-    }
-
-    public void setRequestsSent(ArrayList<Request> requestsSent) {
-        this.requestsSent = requestsSent;
-    }
-
-    public ArrayList<Request> getRequestsReceived() {
-        return requestsReceived;
-    }
-
-    public void setRequestsReceived(ArrayList<Request> requestsReceived) {
-        this.requestsReceived = requestsReceived;
     }
 
     public ArrayList<Chore> getChores()
@@ -74,6 +56,9 @@ public class Roommate {
     {
         ID = _ID;
     }
+    public void setChores(ArrayList<Chore> chores) {
+        this.chores = chores;
+    }
     public void addChore(Chore input)
     {
         chores.add(input);
@@ -81,6 +66,10 @@ public class Roommate {
     public void deleteChore(Chore input)
     {
         chores.remove(input);
+    }
+
+    public void setExpenses(ArrayList<Expense> expenses) {
+        this.expenses = expenses;
     }
     public void addExpense(Expense input)
     {
@@ -99,16 +88,4 @@ public class Roommate {
         }
         return balance;
     }
-
-    private void notifyChore (Chore in)
-    {
-        // fuck.
-    }
-    private void notifyExpense (Expense in)
-    {
-        // fuck.
-    }
-    ArrayList<Chore> chore = new ArrayList<Chore>();
-    ArrayList<Expense> expense = new ArrayList<Expense>();
-    ArrayList<Roommate> roommate = new ArrayList<Roommate>();
 }
